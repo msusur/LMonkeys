@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LMonkeys.Sandbox
+﻿namespace LMonkeys.Sandbox
 {
     class Program
     {
         static void Main(string[] args)
         {
+            var settings = new AlgorithmSettings { InitialPopulationSize = 100 };
+
+            var algorithm = new Algorithm(settings);
         }
     }
 }
