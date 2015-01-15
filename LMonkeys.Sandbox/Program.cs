@@ -1,4 +1,6 @@
-﻿namespace LMonkeys.Sandbox
+﻿using LMonkeys.Library;
+
+namespace LMonkeys.Sandbox
 {
     class Program
     {
