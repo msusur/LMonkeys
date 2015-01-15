@@ -1,25 +1,46 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LMonkeys.Library;
 
 namespace LMonkeys.Sandbox
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var settings = new AlgorithmSettings { InitialPopulationSize = 100 };
+            var genomes = new LuckyMonkeyGenome[0];
+            var generations = 100;
 
-            var algorithm = new Algorithm(settings);
+            while (generations > 0)
+            {
+                generations--;
 
-            var results = algorithm.Calculate().ToArray();
+                var algorithm = new Algorithm(settings, genomes);
 
-            // after making the calculations, we need to compare the real numbers with the results.
-            //results = ResultComparer.Compare(new int[] { 12, 33, 45, 67, 22, 55 }, results);
+                var results = algorithm.Calculate().ToArray();
 
-            // after making the comparation, order them by the rating 
+                // after making the calculations, we need to compare the real numbers with the results.
+                var compareResults = ResultComparer.CompareScore(new[] { 12, 33, 45, 67, 22, 55 }, results);
 
-            // kill the last half of it.
+                // after making the comparation, order them by the rating 
+                var genomesList = ResultComparer.SortByScoreAverage(compareResults);
 
+                // kill the last half of it.
+                genomesList = genomesList.DivideIntoTwoAndGetTop();
+
+                genomes = algorithm.CrossingOver(genomesList);
+                
+                //add some random
+                var randomGenomes= GenomeBuilder.BuildInitialGenomes(25).ToArray();
+                var list = new List<LuckyMonkeyGenome>(genomes);
+                list.AddRange(randomGenomes);
+
+                genomes = list.ToArray();
+            }
+
+            Console.Read();
             /*
              couple the remainings and create new ones.
                       - Convert the Chromosome to byte[] 

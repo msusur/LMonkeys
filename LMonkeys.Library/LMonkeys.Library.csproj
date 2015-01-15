@@ -43,9 +43,12 @@
     <Compile Include="AlgorithmSettings.cs" />
     <Compile Include="CalculationResult.cs" />
     <Compile Include="Chromosome.cs" />
+    <Compile Include="CompareResult.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="GenomeBuilder.cs" />
     <Compile Include="LuckyMonkeyGenome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultComparer.cs" />
     <Compile Include="ThreadSafeRandom.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

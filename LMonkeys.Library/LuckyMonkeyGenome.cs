@@ -7,7 +7,12 @@ namespace LMonkeys.Library
         private readonly Chromosome _chromosome;
         private static readonly ThreadSafeRandom RandomGenerator = new ThreadSafeRandom();
 
-        private LuckyMonkeyGenome(Chromosome chromosome)
+        public Chromosome Chromosome
+        {
+            get { return _chromosome; }
+        }
+
+        public LuckyMonkeyGenome(Chromosome chromosome)
         {
             _chromosome = chromosome;
         }
