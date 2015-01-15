@@ -23,6 +23,9 @@ namespace LMonkeys.Library
 
                 array[i] = Math.Abs((RandomGenerator.Next(1, 49) * _chromosome.Core) % 49);
 
+                // [Not implemented yet]: check if the created random number is in the series. If so, create another one.
+
+
                 if (array[i] == 0)
                 {
                     array[i] = 1;
