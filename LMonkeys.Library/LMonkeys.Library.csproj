@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
     <Compile Include="AlgorithmSettings.cs" />
+    <Compile Include="CalculationResult.cs" />
+    <Compile Include="Chromosome.cs" />
     <Compile Include="GenomeBuilder.cs" />
     <Compile Include="LuckyMonkeyGenome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

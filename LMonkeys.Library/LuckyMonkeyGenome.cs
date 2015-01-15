@@ -4,9 +4,38 @@ namespace LMonkeys.Library
 {
     public class LuckyMonkeyGenome
     {
+        private readonly Chromosome _chromosome;
+        private static readonly ThreadSafeRandom RandomGenerator = new ThreadSafeRandom();
+
+        private LuckyMonkeyGenome(Chromosome chromosome)
+        {
+            _chromosome = chromosome;
+        }
+
+        public int[] Calculate()
+        {
+            var array = new int[6];
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                // make prediction of 6 numbers with the factor of current chromosome. keep them less than 49.
+                // this place is the core of the operation!! We need to discuss on this one.
+
+                array[i] = Math.Abs((RandomGenerator.Next(1, 49) * _chromosome.Core) % 49);
+
+                if (array[i] == 0)
+                {
+                    array[i] = 1;
+                }
+            }
+
+            return array;
+        }
+
         public static LuckyMonkeyGenome Random()
         {
-            throw new NotImplementedException();
+            // each random monkey has their own random chromosome.
+            return new LuckyMonkeyGenome(Chromosome.Random());
         }
     }
 }

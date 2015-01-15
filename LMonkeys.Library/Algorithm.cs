@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LMonkeys.Library
@@ -6,22 +6,23 @@ namespace LMonkeys.Library
     public class Algorithm
     {
         private readonly LuckyMonkeyGenome[] _genomes;
-        private static Lazy<int[]> _availableNumbers = new Lazy<int[]>(BuildAvailableNumbers);
-        private static ThreadSafeRandom _random = new ThreadSafeRandom();
 
         public Algorithm(AlgorithmSettings settings, params LuckyMonkeyGenome[] genomes)
         {
-            _genomes = genomes ?? GenomeBuilder.BuildInitialGenomes(settings.InitialPopulationSize).ToArray();
+            // if any _genomes are initially provided then use them. Else generate your own genomes randomly.
+            _genomes = genomes == null || genomes.Length == 0 
+                ?  GenomeBuilder.BuildInitialGenomes(settings.InitialPopulationSize).ToArray() 
+                : genomes;
         }
 
-        private static int[] BuildAvailableNumbers()
+        public IEnumerable<CalculationResult> Calculate()
         {
-            var numbers = new int[49];
-            for (int i = 0; i < 49; i++)
+            // iterate over each genome, then make them calculate.
+            return _genomes.Select(luckyMonkeyGenome => new CalculationResult
             {
-                numbers[i] = i + 1;
-            }
-            return numbers;
+                Result = luckyMonkeyGenome.Calculate(),
+                ResponsibleMonkey = luckyMonkeyGenome
+            });
         }
     }
 }
